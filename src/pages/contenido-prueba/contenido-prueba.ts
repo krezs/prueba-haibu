@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MasinfoPage } from '../masinfo/masinfo';
-
+import { HaibuProvider } from '../../providers/haibu/haibu';
 /**
  * Generated class for the ContenidoPruebaPage page.
  *
@@ -18,7 +18,7 @@ export class ContenidoPruebaPage {
 
 /* Arreglo estatico de prueba  */
 
-  lista : Array<any> = [
+ /* lista : Array<any> = [
     {
       "id": 1,
       "nombre": "Omar",
@@ -76,16 +76,48 @@ export class ContenidoPruebaPage {
       "activo": 0
     }    
   ]
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+*/
+  
+  personas
+  lista:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public proovedor: HaibuProvider) {
+    this.initializeItems();
   }
 
   verMasInfo(item){
     this.navCtrl.push(MasinfoPage, { item: item });
   }
 
+  initializeItems(){
+    this.lista=this.personas;
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContenidoPruebaPage');
+    this.proovedor.obtenerDatos().subscribe(
+      (data)=>{this.personas=data;},
+      (error)=>{console.log(error);}
+    )
+  }
+
+  validarX(nombre){
+    if(nombre=='Omar'){
+      console.log('ES HOMAAAAR');
+    }
+  }
+
+  buscarPersona(ev){
+
+    this.initializeItems();
+
+    let val= ev.target.value;
+
+    if(val && val.trim() != ''){
+      this.personas= this.personas.filter((item) => {
+        return ((item.nombre).toLowerCase().indexOf(val.toLowerCase())> -1 );
+      })
+    }else{
+      this.ionViewDidLoad();
+    }
   }
 
 }
