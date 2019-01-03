@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>contenido-prueba</ion-title>
+    <ion-title>Listado de personas</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
-</ion-content>
+<ion-content>
+    <ion-list>
+      <button ion-item *ngFor="let item of lista" (click)="verMasInfo(item)" icon-start>
+        {{ item.nombre }}
+      </button>
+    </ion-list>
+  </ion-content>
