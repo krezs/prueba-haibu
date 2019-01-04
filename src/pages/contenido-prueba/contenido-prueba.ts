@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MasinfoPage } from '../masinfo/masinfo';
 import { HaibuProvider } from '../../providers/haibu/haibu';
-import { Validators } from '@angular/forms';
 /**
  * Generated class for the ContenidoPruebaPage page.
  *
