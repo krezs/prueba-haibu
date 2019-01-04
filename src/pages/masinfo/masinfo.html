@@ -7,12 +7,65 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.nombre }}</ion-title>
+    <ion-title>Detalle Persona</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding>   
+    <ion-card>
+    <ion-item>
 
+        <ion-list>
+            <button ion-item>
+                <h2>Nombre: {{ item.nombre }} {{ item.apellido }}</h2>
+              </button>
+        </ion-list>
+
+        <ion-list>
+            <button ion-item>
+                <p ion-text color="danger" *ngIf=!validarFechaNacimiento(item.fechaNacimiento)>{{ item.fechaNacimiento }} Fecha nacimiento incorrecta</p>
+                <p *ngIf=validarFechaNacimiento(item.fechaNacimiento)>{{ item.fechaNacimiento }}</p>
+              </button>
+        </ion-list>
+
+        <ion-list>
+            <button ion-item>
+                Telefono: {{ item.telefono }}
+              </button>
+        </ion-list>
+
+        <ion-list>
+
+            <button ion-item *ngIf=!validarRut(item.rut)>
+               <p ion-text color="danger" > Rut: {{ item.rut }} Rut Invalido </p>
+              </button>
+
+              <button ion-item *ngIf=validarRut(item.rut)>
+                  Rut: {{ item.rut }}
+              </button>
+
+        </ion-list>
+
+        <ion-list>
+            <button ion-item>
+                Direccion: {{ item.direccion.calle }} #{{ item.direccion.numero }}, {{ item.direccion.comuna }}
+              </button>
+        </ion-list>
+
+        <ion-list>
+            <button ion-item *ngIf="item.activo==1; else bloqueno">
+               Activo: Si
+              </button>
+              <ng-template #bloqueno> 
+                <button ion-item>
+                    Activo: No
+                 </button>
+                </ng-template>
+        </ion-list>
+
+
+      </ion-item>
+    </ion-card>
 </ion-content>

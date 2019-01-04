@@ -14,12 +14,16 @@
 
 
 <ion-content>
-    <ion-searchbar (ionInput)="buscarPersona($event)"></ion-searchbar>
-    <ion-list>
+    <ion-searchbar (ionInput)="buscarPersona($event)" placeholder="Buscar persona por nombre"></ion-searchbar>
+    <ion-list inset>
       <button ion-item *ngFor="let item of personas" (click)="verMasInfo(item)" icon-start>
-        {{ item.nombre }}
-    
-        <ion-icon name="heart"></ion-icon>
+          <ion-label>{{ item.nombre }}
+              <ion-icon small *ngIf=!validarRut(item.rut) name="alert" color="danger"></ion-icon>
+              <ion-icon small *ngIf=!validarFechaNacimiento(item.fechaNacimiento) name="close" color="danger"></ion-icon>
+          </ion-label>
+        
+       
+
       </button>
     </ion-list>
   </ion-content>
